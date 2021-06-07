@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# full path to sendmail should be used i.e. /usr/bin/sendmail
+(
+echo "To: <to_mail>"
+echo "Subject: sample test"
+echo "Content-Type: text/html"
+echo
+cat <html file or any content file>
+) | /usr/sbin/sendmail -f <sender_email> -t
+
+## Below block of code is necessary for cgi to work in browser or over http
+echo "Status: 200 OK"
+echo "Content-Type: application/json"
+echo ""
+exit
