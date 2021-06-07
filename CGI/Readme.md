@@ -1,6 +1,6 @@
 If using python/perl/bash etc. script to run a process behind CGI, 
 Remember that when cgi url is hit, the cgi script is not run as root user.
-It is probably run as `www-data user`
+It is probably run as `www-data` user, who is part of a group
 Check the list of users by: `cut -d: -f1 /etc/passwd`
 
 so you need to ensure correct persmissions are present on the file to be run behind cgi.
