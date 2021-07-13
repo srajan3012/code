@@ -1,0 +1,96 @@
+Following: https://pypi.org/project/mod-wsgi/
+
+
+1. /scratch/srgarg/anaconda3/bin/pip3 install mod_wsgi-httpd 
+2. /scratch/srgarg/anaconda3/bin/pip3 install mod_wsgi 
+3. [root@slcam855 bin]# /scratch/srgarg/anaconda3/bin/mod_wsgi-express install-module
+			LoadModule wsgi_module "/scratch/srgarg/anaconda3/lib/python3.6/site-packages/mod_wsgi_packages/httpd/modules/mod_wsgi-py36.cpython-36m-x86_64-linux-gnu.so"
+			WSGIPythonHome "/scratch/srgarg/anaconda3"
+
+4. Copy above output to /etc/http/conf/httpd.conf
+	ON SLCAM855:
+	- WSGIPythonHome "/net/slcam855/scratch/srgarg/anaconda3"
+	- LoadModule wsgi_module "modules/mod_wsgi-py36.so"
+
+	ON SLC12CFP: (if error libpython3.6m.so.1 not found..)
+	- LoadFile "/net/slcam855/scratch/srgarg/anaconda3/lib/libpython3.6m.so.1"
+	- WSGIPythonHome "/net/slcam855/scratch/srgarg/anaconda3"
+	- LoadModule wsgi_module "modules/mod_wsgi-py36.so"
+
+
+6. In directory:
+	6.0 mkdir /var/www/flask_test
+		cd flask_test
+	
+	6.1 create init.py
+		from flask import Flask, render_template
+		app = Flask(__name__)
+		@app.route("/")
+		def home():
+			return render_template("index.html")
+		#if __name__ == "__main__":
+		#	app.run(host='0.0.0.0', port=8080, debug=True)
+
+	6.2	create flask_test.wsgi file.
+		import sys
+		sys.path.insert(0, '/var/www/flask_test')
+		from init import app as application
+
+7. check user and group name in httpd.conf. It was apache in my case. Put that in below configuration
+
+8. Configure virtual host
+	Ref: https://httpd.apache.org/docs/2.4/vhosts/examples.html
+	Ref: https://modwsgi.readthedocs.io/en/develop/user-guides/quick-configuration-guide.html#delegation-to-daemon-process
+	8.1 when deploying in /var/www/flask_test	
+		<VirtualHost *>
+		    ServerName slc12cfp.us.oracle.com
+
+		    WSGIDaemonProcess flask_test user=apache group=apache  threads=5
+		    WSGIScriptAlias / /var/www/flask_test/flask_test.wsgi
+
+		    <Directory /var/www/flask_test>
+		        WSGIProcessGroup flask_test
+		        WSGIApplicationGroup %{GLOBAL}
+		        Order deny,allow
+		        Allow from all
+		    </Directory>
+		</VirtualHost>
+
+	8.2 when deploying in custom location like /scratch/srgarg/apache/flask_test
+		Ref: https://stackoverflow.com/a/21267129/5353329
+		<VirtualHost *>
+		    ServerName slc12cfp.us.oracle.com
+
+		    WSGIDaemonProcess flask_test user=apache group=apache  threads=5
+		    WSGIScriptAlias /raas  /scratch/srgarg/apache/flask_test/flask_test.wsgi
+
+		    <Directory /scratch/srgarg/apache/flask_test>
+		        WSGIProcessGroup flask_test
+		        WSGIApplicationGroup %{GLOBAL}
+		        Require all granted
+		        #Order allow,deny
+		        #Allow from all
+		    </Directory>
+		</VirtualHost>
+
+	8.3 : WSGIDaemonProcess delegates flask to a daemon process. See point 11
+		: WSGIScriptAlias first argument is url endpoint, second argument is location that is mounted on endpoint
+		: Directory is required to tell apache use specified location for this virtualhost
+
+9. /usr/sbin/apachectl restart
+
+
+10. This issue: https://modwsgi.readthedocs.io/en/develop/user-guides/configuration-issues.html
+	- apache communicates with wsgi using sockets.
+	- it needs to create a socket lock file, which by default it creates in /etc/httpd/logs
+	- This dir is only writable by root
+	- So need to change the location of the lock file. But it should be somwhere that only apache can write. /etc/httpd/run is advised.
+	- Add this line in http.conf
+		- WSGISocketPrefix run/wsgi
+
+11. after making any changes in code, no need to restart the apache server again. Just do 'touch flask_test.wsgi'. Basically you need to issue a modification to the wsgi file and the daemon process will itself restart.
+
+Also see:
+https://flask.palletsprojects.com/en/2.0.x/deploying/mod_wsgi/
+https://www.youtube.com/watch?v=w0QDAg85Oow&ab_channel=LukePeters
+https://www.youtube.com/watch?v=2Pcy44-wtio&ab_channel=CodeWorked
