@@ -1,0 +1,71 @@
+# Creating a Screen
+> screen -S <screen_name>
+
+
+
+# list out screens
+	> screen -ls 
+# Detached means screen is active but no one is logged in to it. To connect to a detached session:
+	> screen -r <session name>
+
+# Attached means someone logged into the screen. To connect to an already attached session:
+	> screen -rx <session name>
+
+
+# sending commnad to screen session without connecting or attaching:
+	> screen -X -S <screen_name> <command>
+
+# Terminate screen session without connecting or attaching
+	> screen -X -S my_screen quit
+
+# creating a new window within a session
+	> ctrl+a, c
+
+# switching b/w windows 
+	> ctrl+a, n
+	> ctrl+a, p
+
+# kill window (kills session if only one window)
+	> ctrl+a, k
+
+# kill all windows and thus, the session
+	> ctrl+a, \
+
+# list all windows 
+	> ctrl+a, " (i.e, ctrl+a, shift+') 
+	> select windows from list using arrow keys
+
+# renaming a window
+	> ctrl+a, A (i.e. ctrl+a, shift+A)
+	> backspace name(shell name by default) and enter new name
+
+# create a verical pane
+	> ctrl+a, |
+
+# create a horizontal pane
+	> ctrl+a, S
+
+# switching panes
+	> ctrl+a, Tab
+
+# closing a pane
+	> ctrl+a, X (ctlr+a, shift+x)
+
+# lock session (like lock screen)
+	> ctrl+a, x
+
+# 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
