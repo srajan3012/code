@@ -46,7 +46,7 @@ Following: https://pypi.org/project/mod-wsgi/
 		    ServerName slc12cfp.us.oracle.com
 
 		    WSGIDaemonProcess flask_test user=apache group=apache  threads=5
-		    WSGIScriptAlias / /var/www/flask_test/flask_test.wsgi
+		    WSGIScriptAlias / /var/www/flask_test/flask_test.wsgi application-group=%{GLOBAL}
 
 		    <Directory /var/www/flask_test>
 		        WSGIProcessGroup flask_test
@@ -62,7 +62,7 @@ Following: https://pypi.org/project/mod-wsgi/
 		    ServerName slc12cfp.us.oracle.com
 
 		    WSGIDaemonProcess flask_test user=apache group=apache  threads=5
-		    WSGIScriptAlias /raas  /scratch/srgarg/apache/flask_test/flask_test.wsgi
+		    WSGIScriptAlias /raas  /scratch/srgarg/apache/flask_test/flask_test.wsgi application-group=%{GLOBAL}
 
 		    <Directory /scratch/srgarg/apache/flask_test>
 		        WSGIProcessGroup flask_test
@@ -75,7 +75,21 @@ Following: https://pypi.org/project/mod-wsgi/
 
 	8.3 : WSGIDaemonProcess delegates flask to a daemon process. See point 11
 		: WSGIScriptAlias first argument is url endpoint, second argument is location that is mounted on endpoint
+			: application-group=%{GLOBAL} is added to resolve this error 
+				- Truncated or oversized response headers received from daemon process
+				- The cause of the problem was numpy: Python C extension modules, like numpy, are known to cause timeouts when used under mod_wsgi. To resolve this need to add WSGIApplicationGroup %{GLOBAL}. But that is already there and still doent works. (Ref: https://serverfault.com/a/844786)
+				- We need to make sure that that directive applies to all Python files being interpreted (i.e. not buried in some Apache <Directory /> that limits the scope.)
+				- This worked application-group=%{GLOBAL} (Ref: https://serverfault.com/a/697251)
+
 		: Directory is required to tell apache use specified location for this virtualhost
+
+
+	8.4 : Need to set LD_LIBRARY_PATH for python libs to be loaded by apache
+			In Oracle Linux 7 
+			- vim /etc/sysconfig/httpd 
+			- Add this line: LD_LIBRARY_PATH=/net/adcnas441/export/farm_dbtest/ccvrepos/Database/instantclient_12_1:/net/slcam855/scratch/srgarg/anaconda3/lib
+
+		Ref: https://blogs.oracle.com/opal/configuring-python-cxoracle-and-modwsgi-on-oracle-linux
 
 9. /usr/sbin/apachectl restart
 
