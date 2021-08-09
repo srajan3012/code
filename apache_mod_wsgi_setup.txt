@@ -32,9 +32,15 @@ Following: https://pypi.org/project/mod-wsgi/
 		#	app.run(host='0.0.0.0', port=8080, debug=True)
 
 	6.2	create flask_test.wsgi file.
+			
+		# flask_test.wsgi
 		import sys
+
+		# modify path so that init can be imported
 		sys.path.insert(0, '/var/www/flask_test')
 		from init import app as application
+		
+		
 
 7. check user and group name in httpd.conf. It was apache in my case. Put that in below configuration
 
