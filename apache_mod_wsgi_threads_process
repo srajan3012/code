@@ -1,0 +1,74 @@
+MUST READ: https://modwsgi.readthedocs.io/en/develop/user-guides/processes-and-threading.html
+
+EMBEDDED MODE: child process of apache itself load the WSGI app.
+	- One of the big problems with using embedded mode is that Apache can decide to create additional processes or kill off existing ones.
+DAEMON MODE: child process of apache forks further child process&threads that run the WSGI app
+Ref: http://blog.dscpl.com.au/2012/10/why-are-you-using-embedded-mode-of.html
+
+-
+
+Apache can work with 
+	- multiple process
+	- multiple threads
+
+WSGI environment should supply information as to how apache should work
+	- wsgi.multiprocess
+	- wsgi.multithread
+
+The main factor which determines how Apache operates is which multi-processing module (MPM) is built into Apache at compile time.
+APACHE MPMs	
+	- PREFORK 	: Multiple Child Processes, Single thread each
+	- WORKER	: Multiple Child Processes, Multiple threads each
+	- WINNT		:   Single Child Process  , Multuple threads
+
+- MPM on our VM : PREFORK
+	HOW WOULD APACHE PREFORK WORK BY DEFAULT (without mod_wsgi):
+	- main Apache process will create multiple child processes at startup. 
+	- When a request is received by the parent process, it will be processed by which ever of the child processes is ready.
+		- Each child process will only handle one request at a time. 
+		- If another request arrives at the same time, it will be handled by the next available child process. 
+		- When it is detected that the number of available processes is running out, additional child processes are created.
+			- These additional child process are killed 
+				- when the number of requests drop off
+				- when child reaches it limit in terms of number of requests served. It is then recycled.
+
+	- the client may receive an error resulting from not being able to establish a connection with the web server:
+		- If a limit on number of child processes is reached AND
+		- If there are sufficient requests arriving to fill up the listener socket queue.
+
+	- Although threads are not used to service individual requests, this does not preclude an application from creating separate threads to perform some specific task.
+
+- But We use MOD_WSGI that uses WSGIDaemonProcess
+- MOD_WSGI DAEMON PROCESS
+	- process group can be individually configured to simulate either 
+		- prefork: WSGIDaemonProcess example processes=5 threads=1
+		- worker : WSGIDaemonProcess example processes=2 threads=25
+		- winnt  : WSGIDaemonProcess example threads=25
+
+	VERY IMPORTANT NOTE:
+		- number of daemon processes within a process group is fixed
+		- when the server experiences additional load, no more daemon processes are created than what is defined. 
+		- always plan ahead and make sure the number of processes and threads defined is adequate to cope with the expected load.
+
+- SHARING GLOBAL DATA
+	- there are something called request handlers, which apparently manages which porcess/thread handles the request
+	- in case of winnt, there is only one process, so global data sharing is possible. because request handler will always send to the same process.
+	- but for prefork and worker, sharing of global data is NOT possible as each process will have its own global data.
+		- in this case, global data needs to be in DB, NFS or shared memory accessible by all child process.
+		- for such global data, there must be adequate locking mechanisms in place to prevent race condition. 
+		- The locking mechanisms need to also be able to deal with the case of multiple threads within one child process accessing the global data at the same time.
+		- In our case, model and featurizer are read only for predict mode, so no issues.
+		- writing log can be tricky
+
+- SUB INTERPRETERS
+	 - by default, mod_wsgi creates distinct sub-interpreter for each WSGI application
+	 - If there are multiple WSGI apps, there will be multiple sub-interpreters.
+	 - If apache is running multiple processes mode (prefork, worker), each process will have sub-interpreter for each WSGI app.
+	 - Each sub-interpreter will have its own set of python modules.
+	 - WSGIApplicationGroup directive can be used to mark WSGI apps that should be run in context of common sub interpreter instead of separate ones.
+	 - By doing this, each WSGI app will have access to same python modules.
+	 - May be this is why, loading numpy multiple times was causing the failure. There are 8 apache child processes.
+
+- Using multithreading might not help as after everything is loaded, making the prediction is a CPU bound task. But then 
+	executing SQL queries is not CPU bound, so it may help there.
+- Requests per second handled by apache+mod_wsgi can be increased only using multiple processes. 
