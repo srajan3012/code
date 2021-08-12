@@ -96,6 +96,7 @@ Following: https://pypi.org/project/mod-wsgi/
 			- Add this line: LD_LIBRARY_PATH=/net/adcnas441/export/farm_dbtest/ccvrepos/Database/instantclient_12_1:/net/slcam855/scratch/srgarg/anaconda3/lib
 
 		Ref: https://blogs.oracle.com/opal/configuring-python-cxoracle-and-modwsgi-on-oracle-linux
+		Persistent connection: https://stackoverflow.com/a/34384098/5353329
 
 9. /usr/sbin/apachectl restart
 
