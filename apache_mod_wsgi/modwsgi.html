@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<!-- saved from url=(0093)https://code.google.com/archive/p/modwsgi/wikis/ConfigurationDirectives.wiki#WSGIImportScript -->
+<html class="google ng-scope" lang="en" ng-app="codesiteArchive.application"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta content="initial-scale=1, minimum-scale=1, width=device-width" name="viewport">
+
+    <!-- https://developers.google.com/webmasters/ajax-crawling/docs/specification -->
+    <meta name="fragment" content="!">
+    <title>Google Code Archive - Long-term storage for Google Code Project Hosting.</title>
+
+    <link rel="icon" type="image/vnd.microsoft.icon" href="https://code.google.com/archive/img/project-hosting.ico">
+    <script src="./modwsgi_files/google.js"></script>
+    <link href="./modwsgi_files/maia.css" rel="stylesheet">
+    <link href="./modwsgi_files/css" rel="stylesheet">
+    <link rel="stylesheet" href="./modwsgi_files/archive_css.css">
+    <script>
+      CLOSURE_NO_DEPS = true;
+    </script>
+    <script src="./modwsgi_files/angular.js"></script><style type="text/css">@charset "UTF-8";
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak],
+.ng-cloak, .x-ng-cloak,
+.ng-hide:not(.ng-hide-animate) {
+  display: none !important;
+}
+
+ng\:form {
+  display: block;
+}
+
+.ng-animate-shim {
+  visibility:hidden;
+}
+
+.ng-anchor {
+  position:absolute;
+}
+</style>
+    <script src="./modwsgi_files/pagedown.js"></script>
+    <script src="./modwsgi_files/archive.js"></script>
+    <!--<base href="/archive/">--><base href=".">
+  </head>
+
+  <body>
+    <div class="maia-header" id="maia-header" role="banner">
+      <div class="maia-aux">
+        <a href="https://code.google.com/archive/">
+          </a><h1><a href="https://code.google.com/archive/">
+            <img alt="Google" src="./modwsgi_files/googlelogo_color_116x41dp.png"> Code</a>
+          </h1>
+        
+        <a href="https://code.google.com/archive/">
+          <h2>Archive</h2>
+        </a>
+        <a class="maia-teleport" href="https://code.google.com/archive/#content">Skip to content</a>
+        <div class="maia-util">
+          <form action="https://code.google.com/archive/search" class="maia-search ng-pristine ng-valid">
+            <input name="q" placeholder="Search this site" type="text">
+            <button class="maia-button">
+              <span class="maia-search-icon">Search</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ngView: --><div ng-view="" class="ng-scope"><div ng-controller="ProjectWikiCtrl as wikiCtrl" class="ng-scope">
+<nav-bar-widget nav-level-1="wikiCtrl.navLevel1" class="ng-isolate-scope"><div class="maia-nav maia-complex" id="maia-nav-x" role="navigation">
+  <div class="maia-aux">
+    <ul>
+      <li ng-class="{active: navLevel1 == &#39;projects&#39;}" class="active">
+        <a href="https://code.google.com/archive/">Projects</a>
+        <!-- ngIf: navLevel2 -->
+      </li>
+      <li ng-class="{active: navLevel1 == &#39;search&#39;}">
+        <a href="https://code.google.com/archive/search">Search</a>
+      </li>
+      <li ng-class="{active: navLevel1 == &#39;about&#39;}">
+        <a href="https://code.google.com/archive/about">About</a>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav-bar-widget>
+<div id="maia-main" role="main">
+
+  <!-- ngIf: wikiCtrl.notFound -->
+
+  <div ng-hide="wikiCtrl.notFound">
+    <!-- Left-side resource nav -->
+    <project-resources-widget domain="wikiCtrl.domain" project="wikiCtrl.projectName" class="ng-isolate-scope"><div class="maia-nav" id="maia-nav-y" role="navigation">
+  <!-- ngIf: domain == 'code.google.com' --><ul ng-if="domain == &#39;code.google.com&#39;" class="ng-scope">
+    <li class="active">
+      <a href="https://code.google.com/archive/p/modwsgi/">Project</a>
+    </li>
+    <li>
+      <a href="https://code.google.com/archive/p/modwsgi/source">Source</a>
+    </li>
+    <li>
+      <a href="https://code.google.com/archive/p/modwsgi/issues">Issues</a>
+    </li>
+    <li>
+      <a href="https://code.google.com/archive/p/modwsgi/wikis">Wikis</a>
+    </li>
+    <li>
+      <a href="https://code.google.com/archive/p/modwsgi/downloads">Downloads</a>
+    </li>
+  </ul><!-- end ngIf: domain == 'code.google.com' -->
+
+    <!-- ngIf: domain != 'code.google.com' -->
+</div></project-resources-widget>
+
+    <div class="maia-article" role="article">
+      <div class="maia-teleport" id="content"></div>
+      <div class="maia-cols">
+        <div id="gca-project-header" class="maia-col-10">
+          <a id="gca-export-to-gh" class="maia-button" href="https://code.google.com/export-to-github/export?project=modwsgi">Export to GitHub</a>
+          <img class="gca-project-logo" src="./modwsgi_files/logo.png">
+          <h1 class="ng-binding">modwsgi - ConfigurationDirectives.wiki</h1>
+        </div>
+
+        <!-- ngIf: wikiCtrl.error -->
+
+        <!-- ngIf: !wikiCtrl.error --><div ng-if="!wikiCtrl.error" class="maia-col-10 ng-scope">
+          <hr>
+
+          <markdown-widget text="wikiCtrl.wikiContents" class="markdown"><h1>summary The mod_wsgi configuration directives.</h1>
+
+<h1>labels Phase-Deploy</h1>
+
+<p><em><strong>If you are using mod_wsgi, please consider making a
+donation.</strong></em></p>
+
+<h1>Configuration Directives</h1>
+
+<p>This document describes each of the configuration directives implemented
+by the mod_wsgi module.</p>
+
+<ul>
+<li>WSGIScriptAlias</li>
+<li>WSGIScriptAliasMatch</li>
+<li>WSGIApplicationGroup</li>
+<li>WSGIDaemonProcess</li>
+<li>WSGISocketPrefix</li>
+<li>WSGIProcessGroup</li>
+<li>WSGIRestrictProcess</li>
+<li>WSGIImportScript</li>
+<li>WSGICallableObject</li>
+<li>WSGIPassAuthorization</li>
+<li>WSGIAuthUserScript</li>
+<li>WSGIAuthGroupScript</li>
+<li>WSGIAccessScript</li>
+<li>WSGIScriptReloading</li>
+<li>WSGIReloadMechanism</li>
+<li>WSGIOutputBuffering</li>
+<li>WSGICaseSensitivity</li>
+<li>WSGIPythonOptimize</li>
+<li>WSGIPythonExecutable</li>
+<li>WSGIPythonHome</li>
+<li>WSGIPythonPath</li>
+<li>WSGIPythonEggs</li>
+<li>WSGIRestrictEmbedded</li>
+<li>WSGIRestrictStdin</li>
+<li>WSGIRestrictStdout</li>
+<li>WSGIRestrictSignal</li>
+<li>WSGIAcceptMutex</li>
+<li>WSGILazyInitialization</li>
+</ul>
+
+<p>For further examples of use see the
+Configuration Guidelines.</p>
+
+<h2>WSGIScriptAlias</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Maps a URL to a filesystem location and designates the target as a WSGI script. |
+|:-----------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGIScriptAlias</code> <em><code>URL-path file-path|directory-path</code></em>                         |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config, virtual host                                                     |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                                                     |</p>
+
+<p>The WSGIScriptAlias directive behaves in the same manner as the
+<a href="http://httpd.apache.org/docs/2.2/mod/mod_alias.html#alias">Alias</a>
+directive, except that it additionally marks the target directory as
+containing WSGI scripts, or marks the specific <em>file-path</em> as a script, that
+should be processed by mod_wsgi's <code>wsgi-script</code> handler.</p>
+
+<p>Where the target is a <em>directory-path</em>, URLs with a case-sensitive
+(%-decoded) path beginning with <em>URL-path</em> will be mapped to scripts
+contained in the indicated directory.</p>
+
+<p>For example:</p>
+
+<p><code>
+WSGIScriptAlias /wsgi-scripts/ /web/wsgi-scripts/
+</code></p>
+
+<p>A request for <code>http://www.example.com/wsgi-scripts/name</code> in this case
+would cause the server to run the WSGI application defined in
+<code>/web/wsgi-scripts/name</code>. This configuration is essentially equivalent
+to:</p>
+
+<p><code>
+Alias /wsgi-scripts/ /web/wsgi-scripts/
+&lt;Location /wsgi-scripts&gt;
+SetHandler wsgi-script
+Options +ExecCGI
+&lt;/Location&gt;
+</code></p>
+
+<p>Where the target is a <em>file-path</em>, URLs with a case-sensitive
+(%-decoded) path beginning with <em>URL-path</em> will be mapped to the script
+defined by the <em>file-path</em>.</p>
+
+<p>For example:</p>
+
+<p><code>
+WSGIScriptAlias /name /web/wsgi-scripts/name
+</code></p>
+
+<p>A request for <code>http://www.example.com/name</code> in this case would cause the
+server to run the WSGI application defined in <code>/web/wsgi-scripts/name</code>.</p>
+
+<p>If possible you should avoid placing WSGI scripts under the
+<a href="http://httpd.apache.org/docs/2.2/mod/core.html#documentroot">DocumentRoot</a> in
+order to avoid accidentally revealing their source code if the
+configuration is ever changed. The WSGIScriptAlias makes this easy by
+mapping a URL and designating the location of any WSGI scripts at the same
+time. If you do choose to place your WSGI scripts in a directory already
+accessible to clients, do not use WSGIScriptAlias. Instead, use
+<a href="http://httpd.apache.org/docs/2.2/mod/core.html#directory">&lt;Directory&gt;</a>,
+<a href="http://httpd.apache.org/docs/2.2/mod/core.html#sethandler">SetHandler</a>, and
+<a href="http://httpd.apache.org/docs/2.2/mod/core.html#options">Options</a> as in:</p>
+
+<p><code>
+&lt;Directory /usr/local/apache/htdocs/wsgi-scripts&gt;
+SetHandler wsgi-script
+Options ExecCGI
+&lt;/Directory&gt;
+</code></p>
+
+<p>This is necessary since multiple <em>URL-paths</em> can map to the same filesystem
+location, potentially bypassing the WSGIScriptAlias and revealing the
+source code of the WSGI scripts if they are not restricted by a
+<a href="http://httpd.apache.org/docs/2.2/mod/core.html#directory">Directory</a>
+section.</p>
+
+<h2>WSGIScriptAliasMatch</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Maps a URL to a filesystem location and designates the target as a WSGI script. |
+|:-----------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGIScriptAliasMatch</code> <em><code>regex file-path|directory-path</code></em>                       |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config, virtual host                                                     |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                                                     |</p>
+
+<p>This directive is similar to the WSGIScriptAlias directive, but makes use
+of regular expressions, instead of simple prefix matching. The supplied
+regular expression is matched against the URL-path, and if it matches, the
+server will substitute any parenthesized matches into the given string and
+use it as a filename.</p>
+
+<p>For example, to map a URL to scripts contained within
+a directory where the script files use the <code>.wsgi</code> extension, but it
+is desired that the extension not appear in the URL, use:</p>
+
+<p><code>
+WSGIScriptAliasMatch ^/wsgi-scripts/([^/]+) /web/wsgi-scripts/$1.wsgi
+</code></p>
+
+<p>Note that you should only use WSGIScriptAliasMatch if you know what you are
+doing. In most cases you should be using WSGIScriptAlias instead. If you
+use WSGIScriptAliasMatch and don't do things the correct way, then you risk
+modifying the value of SCRIPT_NAME as passed to the WSGI application and
+this can stuff things up badly causing URL mapping to not work correctly
+within the WSGI application or stuff up reconstruction of the full URL when
+doing redirects. This is because the substitution of the matched sub
+pattern from the left hand side back into the right hand side is often
+critical.</p>
+
+<p>If you think you need to use WSGIScriptAliasMatch, you probably don't
+really. If you really really think you need it, then check on the mod_wsgi
+mailing list about how to use it properly.</p>
+
+<h2>WSGIApplicationGroup</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Sets which application group WSGI application belongs to. |
+|:-----------------------------------------------------------------------------------------|:----------------------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGIApplicationGroup %{GLOBAL}|%{SERVER}|%{RESOURCE}|%{ENV:variable}|name</code> |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Default">Default:</a></strong>         | <code>WSGIApplicationGroup %{RESOURCE}</code>                        |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config, virtual host, directory                    |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                               |</p>
+
+<p>The WSGIApplicationGroup directive can be used to specify which application
+group a WSGI application or set of WSGI applications belongs to. All WSGI
+applications within the same application group will execute within the
+context of the same Python sub interpreter of the process handling the
+request.</p>
+
+<p>The argument to the WSGIApplicationGroup can be either one of four special
+expanding variables or an explicit name of your own choosing. The meaning
+of the special variables are:</p>
+
+<p><strong>%{GLOBAL}</strong></p>
+
+<blockquote>
+  <p>The application group name will be set to the empty string.</p>
+  
+  <p>Any WSGI applications in the global application group will always be
+  executed within the context of the first interpreter created by Python
+  when it is initialised. Forcing a WSGI application to run within the
+  first interpreter can be necessary when a third party C extension
+  module for Python has used the simplified threading API for
+  manipulation of the Python GIL and thus will not run correctly within
+  any additional sub interpreters created by Python.</p>
+</blockquote>
+
+<p><strong>%{SERVER}</strong></p>
+
+<blockquote>
+  <p>The application group name will be set to the server hostname. If the
+  request arrived over a non standard HTTP/HTTPS port, the port number
+  will be added as a suffix to the group name separated by a colon.</p>
+  
+  <p>For example, if the virtual host <code>www.example.com</code> is handling
+  requests on the standard HTTP port (80) and HTTPS port (443), a request
+  arriving on either port would see the application group name being set
+  to <code>www.example.com</code>. If instead the virtual host was handling requests
+  on port 8080, then the application group name would be set to
+  <code>www.example.com:8080</code>.</p>
+</blockquote>
+
+<p><strong>%{RESOURCE}</strong></p>
+
+<blockquote>
+  <p>The application group name will be set to the server hostname and port
+  as for the <code>%{SERVER}</code> variable, to which the value of WSGI environment
+  variable <code>SCRIPT_NAME</code> is appended separated by the file separator
+  character.</p>
+  
+  <p>For example, if the virtual host <code>www.example.com</code> was handling
+  requests on port 8080 and the URL-path which mapped to the WSGI
+  application was <code>http://www.example.com/wsgi-scripts/foo</code>, then the
+  application group name would be set to
+  <code>www.example.com:8080|/wsgi-scripts/foo</code>.</p>
+  
+  <p>The effect of using the <code>%{RESOURCE}</code> variable expansion is for each
+  application on any server to be isolated from all others by being
+  mapped to its own Python sub interpreter.</p>
+</blockquote>
+
+<p><strong>%{ENV:variable}</strong></p>
+
+<blockquote>
+  <p>The application group name will be set to the value of the named
+  environment variable. The environment variable is looked-up via the
+  internal Apache notes and subprocess environment data structures and
+  (if not found there) via getenv() from the Apache server process.</p>
+</blockquote>
+
+<p>In an Apache configuration file, environment variables accessible using
+the <code>%{ENV}</code> variable reference can be setup by using directives such as
+<a href="http://httpd.apache.org/docs/2.2/mod/mod_env.html#setenv">SetEnv</a> and
+<a href="http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html#rewriterule">RewriteRule</a>.</p>
+
+<p>For example, to group all WSGI scripts for a specific user when using
+<a href="http://httpd.apache.org/docs/2.2/mod/mod_userdir.html">mod_userdir</a>
+within the same application group, the following could be used:</p>
+
+<p>```
+RewriteEngine On
+RewriteCond %{REQUEST_URI} ^/~([^/]+)
+RewriteRule . - [E=APPLICATION_GROUP:~%1]</p>
+
+<p>
+Options ExecCGI
+SetHandler wsgi-script
+WSGIApplicationGroup %{ENV:APPLICATION_GROUP}
+
+```</p>
+
+<p>Note that in embedded mode or a multi process daemon process group, there
+will be an instance of the named sub interpreter in each process. Thus the
+directive only ensures that request is handled in the named sub interpreter
+within the process that handles the request. If you need to ensure that
+requests for a specific user always go back to the exact same sub interpreter,
+then you will need to use a daemon process group with only a single process,
+or implement sticky session mechanism across a number of single process
+daemon process groups.</p>
+
+<h2>WSGIDaemonProcess</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Configure a distinct daemon process for running applications. |
+|:-----------------------------------------------------------------------------------------|:--------------------------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGIDaemonProcess</code> <em><code>name</code></em> <code>[</code> <em><code>options</code></em> <code>]</code>              |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config, virtual host                                   |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                                   |</p>
+
+<p>The WSGIDaemonProcess directive can be used to specify that distinct daemon
+processes should be created to which the running of WSGI applications can
+be delegated. Where Apache has been started as the <code>root</code> user, the
+daemon processes can be run as a user different to that which the Apache
+child processes would normally be run as.</p>
+
+<p>When distinct daemon processes are enabled and used, the process is
+dedicated to mod_wsgi and the only thing that the processes do is run the
+WSGI applications assigned to that process group. Any other Apache modules
+such as PHP or activities such as serving up static files continue to be
+run in the standard Apache child processes.</p>
+
+<p>Note that having denoted that daemon processes should be created by using
+the WSGIDaemonProcess directive, the WSGIProcessGroup directive still needs
+to be used to delegate specific WSGI applications to execute within those
+daemon processes.</p>
+
+<p>Also note that the name of the daemon process group must be unique for the
+whole server. That is, it is not possible to use the same daemon process
+group name in different virtual hosts.</p>
+
+<p>Options which can be supplied to the WSGIDaemonProcess directive are:</p>
+
+<p><strong>user=name | user=#uid</strong></p>
+
+<blockquote>
+  <p>Defines the UNIX user <em>name</em> or numeric user <em>uid</em> of the user that
+  the daemon processes should be run as. If this option is not supplied
+  the daemon processes will be run as the same user that Apache would
+  run child processes and as defined by the
+  <a href="http://httpd.apache.org/docs/2.2/mod/mpm_common.html#user">User</a>
+  directive.</p>
+  
+  <p>Note that this option is ignored if Apache wasn't started as the root
+  user, in which case no matter what the settings, the daemon processes
+  will be run as the user that Apache was started as.</p>
+  
+  <p>Also be aware that mod_wsgi will not allow you to run a daemon
+  process group as the root user due to the security risk of running
+  a web application as root.</p>
+</blockquote>
+
+<p><strong>group=name | group=#gid</strong></p>
+
+<blockquote>
+  <p>Defines the UNIX group <em>name</em> or numeric group <em>gid</em> of the primary
+  group that the daemon processes should be run as. If this option is not
+  supplied the daemon processes will be run as the same group that Apache
+  would run child processes and as defined by the
+  <a href="http://httpd.apache.org/docs/2.2/mod/mpm_common.html#group">Group</a>
+  directive.</p>
+  
+  <p>Note that this option is ignored if Apache wasn't started as the root
+  user, in which case no matter what the settings, the daemon processes
+  will be run as the group that Apache was started as.</p>
+</blockquote>
+
+<p><strong>processes=num</strong></p>
+
+<blockquote>
+  <p>Defines the number of daemon processes that should be started in this
+  process group. If not defined then only one process will be run in this
+  process group.</p>
+  
+  <p>Note that if this option is defined as 'processes=1', then the WSGI
+  environment attribute called 'wsgi.multiprocess' will be set to be True
+  whereas not providing the option at all will result in the attribute
+  being set to be False. This distinction is to allow for where some form
+  of mapping mechanism might be used to distribute requests across
+  multiple process groups and thus in effect it is still a multiprocess
+  application. If you need to ensure that 'wsgi.multiprocess' is False so
+  that interactive debuggers will work, simply do not specify the
+  'processes' option and allow the default single daemon process to be
+  created in the process group.</p>
+</blockquote>
+
+<p><strong>threads=num</strong></p>
+
+<blockquote>
+  <p>Defines the number of threads to be created to handle requests in each
+  daemon process within the process group.</p>
+  
+  <p>If this option is not defined then the default will be to create 15
+  threads in each daemon process within the process group.</p>
+</blockquote>
+
+<p><strong>umask=0nnn</strong></p>
+
+<blockquote>
+  <p>Defines a value to be used for the umask of the daemon processes within
+  the process group. The value must be provided as an octal number.</p>
+  
+  <p>If this option is not defined then the umask of the user that Apache is
+  initially started as will be inherited by the process. Typically the
+  inherited umask would be '0022'.</p>
+</blockquote>
+
+<p><strong>home=directory</strong></p>
+
+<blockquote>
+  <p>Defines an absolute path of a directory which should be used as the
+  initial current working directory of the daemon processes within the
+  process group.</p>
+  
+  <p>If this option is not defined, in mod_wsgi 1.X the current working
+  directory of the Apache parent process will be inherited by the daemon
+  processes within the process group. Normally the current working directory
+  of the Apache parent process would be the root directory. In mod_wsgi 2.0+
+  the initial current working directory will be set to be the home
+  directory of the user that the daemon process runs as.</p>
+</blockquote>
+
+<p><strong>python-path=directory | python-path=directory:directory</strong> (2.0+)</p>
+
+<blockquote>
+  <p>List of colon separated directories to add to the Python module search
+  path, ie., <code>sys.path</code>.</p>
+  
+  <p>Note that this is not strictly the same as having set <code>PYTHONPATH</code>
+  environment variable when running normal command line Python. When this
+  option is used, the directories are added by calling
+  <code>site.addsitedir()</code>. As well as adding the directory to
+  <code>sys.path</code> this function has the effect of opening and interpreting
+  any '.pth' files located in the specified directories. The option
+  therefore can be used to point at the <code>site-packages</code> directory
+  corresponding to a Python virtual environment created by a tool such as
+  <code>virtualenv</code>, with any additional directories corresponding to
+  Python eggs within that directory also being automatically added to
+  <code>sys.path</code>.</p>
+</blockquote>
+
+<p><strong>python-eggs=directory</strong> (2.0+)</p>
+
+<blockquote>
+  <p>Directory to be used as the Python egg cache directory. This is
+  equivalent to having set the <code>PYTHON_EGG_CACHE</code> environment
+  variable.</p>
+  
+  <p>Note that the directory specified must exist and be writable by the
+  user that the daemon process run as.</p>
+</blockquote>
+
+<p><strong>stack-size=nnn</strong> (2.0+)</p>
+
+<blockquote>
+  <p>The amount of virtual memory in bytes to be allocated for the stack
+  corresponding to each thread created by mod_wsgi in a daemon process.</p>
+  
+  <p>This option would be used when running Linux in a VPS system which has
+  been configured with a quite low 'Memory Limit' in relation to the
+  'Context RSS' and 'Max RSS Memory' limits. In particular, the default
+  stack size for threads under Linux is 8MB is quite excessive and could
+  for such a VPS result in the 'Memory Limit' being exceeded before the
+  RSS limits were exceeded. In this situation, the stack size should be
+  dropped down to be in the region of 512KB (524288 bytes).</p>
+</blockquote>
+
+<p><strong>maximum-requests=nnn</strong></p>
+
+<blockquote>
+  <p>Defines a limit on the number of requests a daemon process should
+  process before it is shutdown and restarted. Setting this to a non zero
+  value has the benefit of limiting the amount of memory that a process
+  can consume by (accidental) memory leakage.</p>
+  
+  <p>If this option is not defined, or is defined to be 0, then the daemon
+  process will be persistent and will continue to service requests until
+  Apache itself is restarted or shutdown.</p>
+</blockquote>
+
+<p><strong>inactivity-timeout=sss</strong> (2.0+)</p>
+
+<blockquote>
+  <p>Defines the maximum number of seconds allowed to pass before the
+  daemon process is shutdown and restarted when the daemon process has
+  entered an idle state. For the purposes of this option, being idle
+  means no new requests being received, or no attempts by current
+  requests to read request content or generate response content for the
+  defined period.</p>
+  
+  <p>This option exists to allow infrequently used applications running in
+  a daemon process to be restarted, thus allowing memory being used to
+  be reclaimed, with process size dropping back to the initial startup
+  size before any application had been loaded or requests processed.</p>
+</blockquote>
+
+<p><strong>deadlock-timeout=sss</strong> (2.0+)</p>
+
+<blockquote>
+  <p>Defines the maximum number of seconds allowed to pass before the
+  daemon process is shutdown and restarted after a potential deadlock on
+  the Python GIL has been detected. The default is 300 seconds.</p>
+  
+  <p>This option exists to combat the problem of a daemon process freezing
+  as the result of a rouge Python C extension module which doesn't
+  properly release the Python GIL when entering into a blocking or long
+  running operation.</p>
+</blockquote>
+
+<p><strong>shutdown-timeout=sss</strong></p>
+
+<blockquote>
+  <p>Defines the maximum number of seconds allowed to pass when waiting
+  for a daemon process to gracefully shutdown as a result of the maximum
+  number of requests or inactivity timeout being reached, or when a user
+  initiated SIGINT signal is sent to a daemon process. When this timeout
+  has been reached the daemon process will be forced to exited even if
+  there are still active requests or it is still running Python exit
+  functions.</p>
+  
+  <p>If this option is not defined, then the shutdown timeout will be set
+  to 5 seconds. Note that this option does not change the shutdown
+  timeout applied to daemon processes when Apache itself is being stopped
+  or restarted. That timeout value is defined internally to Apache as 3
+  seconds and cannot be overridden.</p>
+</blockquote>
+
+<p><strong>display-name=value</strong></p>
+
+<blockquote>
+  <p>Defines a different name to show for the daemon process when using the
+  'ps' command to list processes. If the value is '%{GROUP}' then the
+  name will be '(wsgi:group)' where 'group' is replaced with the name
+  of the daemon process group.</p>
+  
+  <p>Note that only as many characters of the supplied value can be displayed
+  as were originally taken up by 'argv0' of the executing process. Anything
+  in excess of this will be truncated.</p>
+  
+  <p>This feature may not work as described on all platforms. Typically it
+  also requires a 'ps' program with BSD heritage. Thus on Solaris UNIX
+  the '/usr/bin/ps' program doesn't work, but '/usr/ucb/ps' does.</p>
+</blockquote>
+
+<p><strong>receive-buffer-size=nnn</strong></p>
+
+<blockquote>
+  <p>Defines the UNIX socket buffer size for data being received by the
+  daemon process from the Apache child process.</p>
+  
+  <p>This option may need to be used to override small default values set by
+  certain operating systems and would help avoid possibility of deadlock
+  between Apache child process and daemon process when WSGI application
+  generates large responses but doesn't consume request content. In
+  general such deadlock problems would not arise with well behaved WSGI
+  applications, but some spam bots attempting to post data to web sites
+  are known to trigger the problem.</p>
+  
+  <p>The maximum possible value that can be set for the buffer size is
+  operating system dependent and will need to be calculated through trial
+  and error.</p>
+</blockquote>
+
+<p><strong>send-buffer-size=nnn</strong></p>
+
+<blockquote>
+  <p>Defines the UNIX socket buffer size for data being sent in the
+  direction daemon process back to Apache child process.</p>
+  
+  <p>This option may need to be used to override small default values set by
+  certain operating systems and would help avoid possibility of deadlock
+  between Apache child process and daemon process when WSGI application
+  generates large responses but doesn't consume request content. In
+  general such deadlock problems would not arise with well behaved WSGI
+  applications, but some spam bots attempting to post data to web sites
+  are known to trigger the problem.</p>
+  
+  <p>The maximum possible value that can be set for the buffer size is
+  operating system dependent and will need to be calculated through trial
+  and error.</p>
+</blockquote>
+
+<p>To delegate a particular WSGI application to run in a named set of daemon
+processes, the WSGIProcessGroup directive should be specified in
+appropriate context for that application. If WSGIProcessGroup is not used,
+the application will be run within the standard Apache child processes.</p>
+
+<p>If the WSGIDaemonProcess directive is specified outside of all virtual
+host containers, any WSGI application can be delegated to be run within
+that daemon process group. If the WSGIDaemonProcess directive is specified
+within a virtual host container, only WSGI applications associated with
+virtual hosts with the same server name as that virtual host can be
+delegated to that set of daemon processes.</p>
+
+<p>When WSGIDaemonProcess is associated with a virtual host, the error log
+associated with that virtual host will be used for all Apache error log
+output from mod_wsgi rather than it appear in the main Apache error log.</p>
+
+<p>For example, if a server is hosting two virtual hosts and it is desired
+that the WSGI applications related to each virtual host run in distinct
+processes of their own and as a user which is the owner of that virtual
+host, the following could be used.</p>
+
+<p>```
+
+ServerName www.site1.com
+CustomLog logs/www.site1.com-access_log common
+ErrorLog logs/ww.site1.com-error_log</p>
+
+<p>WSGIDaemonProcess www.site1.com user=joe group=joe processes=2 threads=25
+WSGIProcessGroup www.site1.com</p>
+
+<p>...
+</p>
+
+<p>
+ServerName www.site2.com
+CustomLog logs/www.site2.com-access_log common
+ErrorLog logs/www.site2.com-error_log</p>
+
+<p>WSGIDaemonProcess www.site2.com user=bob group=bob processes=2 threads=25
+WSGIProcessGroup www.site2.com</p>
+
+<p>...
+
+```</p>
+
+<p>Note that the WSGIDaemonProcess directive and corresponding features are
+not available on Windows or when running Apache 1.3.</p>
+
+<h2>WSGISocketPrefix</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Configure directory to use for daemon sockets. |
+|:-----------------------------------------------------------------------------------------|:-----------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGISocketPrefix</code> <em><code>prefix</code></em>                  |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config                                  |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                    |</p>
+
+<p>Defines the directory and name prefix to be used for the UNIX domain
+sockets used by mod_wsgi to communicate between the Apache child processes
+and the daemon processes.</p>
+
+<p>If the directive is not defined, the sockets and any related mutex lock
+files will be placed in the standard Apache runtime directory. This is the
+same directory that the Apache log files would normally be placed.</p>
+
+<p>For some Linux distributions, restrictive permissions are placed on the
+standard Apache runtime directory such that the directory is not readable
+to others. This can cause problems with mod_wsgi because the user that the
+Apache child processes run as will subsequently not have the required
+permissions to access the directory to be able to connect to the sockets.</p>
+
+<p>When this occurs, a '503 Service Temporarily Unavailable' error response
+would be received by the client. To resolve the problem, the
+WSGISocketPrefix directive should be defined to point at an alternate
+location. The value may be a location relative to the Apache root directory,
+or an absolute path.</p>
+
+<p>On systems which restrict access to the standard Apache runtime directory,
+they normally provide an alternate directory for placing sockets and lock
+files used by Apache modules. This directory is usually called 'run' and
+to make use of this directory the WSGISocketPrefix directive would be set
+as follows:</p>
+
+<p><code>
+WSGISocketPrefix run/wsgi
+</code></p>
+
+<p>Note, do not put the sockets in the system temporary working directory.
+That is, do not go making the prefix '/tmp/wsgi'. The directory should be
+one that is only writable by 'root' user, or if not starting Apache as
+'root', the user that Apache is started as.</p>
+
+<p>Note that the WSGISocketPrefix directive and corresponding features are not
+available on Windows or when running Apache 1.3.</p>
+
+<h2>WSGIProcessGroup</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Sets which process group WSGI application is assigned to. |
+|:-----------------------------------------------------------------------------------------|:----------------------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGIProcessGroup %{GLOBAL}|%{ENV:variable}|name</code>         |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Default">Default:</a></strong>         | <code>WSGIProcessGroup %{GLOBAL}</code>                              |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config, virtual host, directory                    |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                               |</p>
+
+<p>The WSGIProcessGroup directive can be used to specify which process group a
+WSGI application or set of WSGI applications will be executed in. All WSGI
+applications within the same process group will execute within the context
+of the same group of daemon processes.</p>
+
+<p>The argument to the WSGIProcessGroup can be either one of two special
+expanding variables or the actual name of a group of daemon processes setup
+using the WSGIDaemonProcess directive. The meaning of the special variables
+are:</p>
+
+<p><strong>%{GLOBAL}</strong></p>
+
+<blockquote>
+  <p>The process group name will be set to the empty string.</p>
+  
+  <p>Any WSGI applications in the global process group will always be
+  executed within the context of the standard Apache child processes.
+  Such WSGI applications will incur the least runtime overhead, however,
+  they will share the same process space with other Apache modules such
+  as PHP, as well as the process being used to serve up static file
+  content. Running WSGI applications within the standard Apache child
+  processes will also mean the application will run as the user that
+  Apache would normally run as.</p>
+</blockquote>
+
+<p><strong>%{ENV:variable}</strong></p>
+
+<blockquote>
+  <p>The process group name will be set to the value of the named
+  environment variable. The environment variable is looked-up via the
+  internal Apache notes and subprocess environment data structures and
+  (if not found there) via getenv() from the Apache server process.
+  The result must identify a named process group setup using the
+  WSGIDaemonProcess directive.</p>
+</blockquote>
+
+<p>In an Apache configuration file, environment variables accessible using
+the <code>%{ENV}</code> variable reference can be setup by using directives such as
+<a href="http://httpd.apache.org/docs/2.2/mod/mod_env.html#setenv">SetEnv</a> and
+<a href="http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html#rewriterule">RewriteRule</a>.</p>
+
+<p>For example, to select which process group a specific WSGI application
+should execute within based on entries in a database file, the following
+could be used:</p>
+
+<p>```
+RewriteEngine On
+RewriteMap wsgiprocmap dbm:/etc/httpd/wsgiprocmap.dbm
+RewriteRule . - [E=PROCESS_GROUP:${wsgiprocmap:%{REQUEST_URI}}]</p>
+
+<p>WSGIProcessGroup %{ENV:PROCESS_GROUP}
+```</p>
+
+<p>When using the WSGIProcessGroup directive, only daemon process groups
+defined within virtual hosts with the same server name, or those defined at
+global scope outside of any virtual hosts can be selected. It is not
+possible to select a daemon process group which is defined within a
+different virtual host. Which daemon process groups can be selected may be
+further restricted if the WSGIRestrictProcess directive has been used.</p>
+
+<p>Note that the WSGIProcessGroup directive and corresponding features are not
+available on Windows or when running Apache 1.3.</p>
+
+<h2>WSGIRestrictProcess</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Restrict which daemon process groups can be selected. |
+|:-----------------------------------------------------------------------------------------|:------------------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGIRestrictProcess</code> <em><code>group-1 group-2 ...</code></em>         |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config, virtual host, directory                |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                           |</p>
+
+<p>When using the WSGIProcessGroup directive, daemon process groups defined
+within virtual hosts with the same server name, or those defined at global
+scope outside of any virtual hosts can be selected. It is not possible to
+select a daemon process group which is defined within a different virtual
+host.</p>
+
+<p>To further limit which of the available daemon process groups can be
+selected, the WSGIRestrictProcess directive can be used to list a
+restricted set of daemon process group names. This could be used for
+example where %{ENV} substitution is being used to allow the daemon process
+group to be selected from a .htaccess file for a specific user.</p>
+
+<p>The main Apache configuration for this scenario might be:</p>
+
+<p>```
+WSGIDaemonProcess default processes=2 threads=25</p>
+
+<p>
+ServerName www.site.com</p>
+
+<p>WSGIDaemonProcess bob:1 user=bob group=bob threads=25
+WSGIDaemonProcess bob:2 user=bob group=bob threads=25
+WSGIDaemonProcess bob:3 user=bob group=bob threads=25</p>
+
+<p>WSGIDaemonProcess joe:1 user=joe group=joe threads=25
+WSGIDaemonProcess joe:2 user=joe group=joe threads=25
+WSGIDaemonProcess joe:3 user=joe group=joe threads=25</p>
+
+<p>SetEnv PROCESS_GROUP default
+WSGIProcessGroup %{ENV:PROCESS_GROUP}</p>
+
+<p>
+Options ExecCGI
+AllowOverride FileInfo
+AddHandler wsgi-script .wsgi
+WSGIRestrictProcess bob:1 bob:2 bob:3
+SetEnv PROCESS_GROUP bob:1
+
+
+```</p>
+
+<p>The .htaccess file within the users account could then delegate specific
+WSGI applications to different daemon process groups using the
+<a href="http://httpd.apache.org/docs/2.2/mod/mod_env.html#setenv">SetEnv</a>
+directive.</p>
+
+<p>```
+
+SetEnv PROCESS_GROUP bob:2
+</p>
+
+<p>
+SetEnv PROCESS_GROUP bob:3
+
+```</p>
+
+<p>Note that the WSGIDaemonProcess directive and corresponding features are
+not available on Windows or when running Apache 1.3.</p>
+
+<h2>WSGIImportScript</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Specify a script file to be loaded on process start. |
+|:-----------------------------------------------------------------------------------------|:-----------------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGIImportScript</code> <em><code>path</code></em> <code>[</code> <em><code>options</code></em> <code>]</code>      |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config                                        |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                          |</p>
+
+<p>The WSGIImportScript directive can be used to specify a script file to be
+loaded when a process starts. Options must be provided to indicate the name
+of the process group and the application group into which the script will
+be loaded.</p>
+
+<p>The options which must supplied to the WSGIImportScript directive are:</p>
+
+<p><strong>process-group=name</strong></p>
+
+<blockquote>
+  <p>Specifies the name of the process group for which the script file will
+  be loaded.</p>
+  
+  <p>The name of the process group can be set to the special value
+  '%{GLOBAL}' which denotes that the script file be loaded for the Apache
+  child processes. Any other value indicates appropriate process group
+  for mod_wsgi daemon mode.</p>
+</blockquote>
+
+<p><strong>application-group=name</strong></p>
+
+<blockquote>
+  <p>Specifies the name of the application group within the specified
+  process for which the script file will be loaded.</p>
+  
+  <p>The name of the application group can be set to the special value
+  '%{GLOBAL}' which denotes that the script file be loaded within the
+  context of the first interpreter created by Python when it is
+  initialised. Otherwise, will be loaded into the interpreter for the
+  specified application group.</p>
+</blockquote>
+
+<p>Because the script files are loaded prior to beginning to accept any
+requests, any delay in loading the script will not cause actual requests to
+be blocked. As such, the WSGIImportScript can be used to preload a WSGI
+application script file on process start so that it is ready when actual
+user requests arrive. For where there are multiple processes handling
+requests, this can reduce or eliminate the apparent stalling of an
+application when performing a restart of Apache or a daemon mode process
+group.</p>
+
+<h2>WSGICallableObject</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Sets the name of the WSGI application callable. |
+|:-----------------------------------------------------------------------------------------|:------------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGICallableObject %{ENV:variable}|name</code>       |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Default">Default:</a></strong>         | <code>WSGICallableObject application</code>                |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config, virtual host, directory, .htaccess |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Override">Override:</a></strong>       | FileInfo                                        |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                     |</p>
+
+<p>The WSGICallableObject directive can be used to override the name of the
+Python callable object in the script file which is used as the entry point
+into the WSGI application.</p>
+
+<p>When <code>%{ENV}</code> is being used, the environment variable is looked-up via the
+internal Apache notes and subprocess environment data structures and (if
+not found there) via getenv() from the Apache server process.</p>
+
+<p>In an Apache configuration file, environment variables accessible using
+the <code>%{ENV}</code> variable reference can be setup by using directives such as
+<a href="http://httpd.apache.org/docs/2.2/mod/mod_env.html#setenv">SetEnv</a> and
+<a href="http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html#rewriterule">RewriteRule</a>.</p>
+
+<p>Note that the name of the callable object must be an object present at
+global scope within the WSGI script file. It is not possible to use a dotted
+path to refer to a sub object of a module imported by the WSGI script file.</p>
+
+<h2>WSGIPassAuthorization</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Enable/Disable passing of authorisation headers. |
+|:-----------------------------------------------------------------------------------------|:-------------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGIPassAuthorization On|Off</code>                   |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Default">Default:</a></strong>         | <code>WSGIPassAuthorization Off</code>                      |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong> 1.X     | server config, virtual host, directory           |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong> 2.0+    | server config, virtual host, directory, .htaccess |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                      |</p>
+
+<p><strong>Note: Ability to use this option in .htaccess file was only added in 2.0c5.</strong></p>
+
+<p>The WSGIPassAuthorization directive can be used to control whether HTTP
+authorisation headers are passed through to a WSGI application in the
+<code>HTTP_AUTHORIZATION</code> variable of the WSGI application environment when
+the equivalent HTTP request headers are present. This option would need to
+be set to <code>On</code> if the WSGI application was to handle authorisation
+rather than Apache doing it.</p>
+
+<p>Authorisation headers are not passed through by default as doing so could
+leak information about passwords through to a WSGI application which should
+not be able to see them when Apache is performing authorisation. If Apache
+is performing authorisation, a WSGI application can still find out what
+type of authorisation scheme was used by checking the variable
+<code>AUTH_TYPE</code> of the WSGI application environment. The login name of the
+authorised user can be determined by checking the variable
+<code>REMOTE_USER</code>.</p>
+
+<h2>WSGIAuthUserScript</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Specify script implementing an authentication provider. |
+|:-----------------------------------------------------------------------------------------|:--------------------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGIAuthUserScript</code> <em><code>path</code></em> <code>[</code> <em><code>options</code></em> <code>]</code>       |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong> 2.0+    | directory, .htaccess                                    |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Override">Override:</a></strong>       | AuthConfig                                              |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                             |</p>
+
+<p>The WSGIAuthUserScript directive can be used to specify a script which
+implements an Apache authentication provider.</p>
+
+<p>Such an authentication provider can be used where you want Apache to worry
+about the handshaking related to HTTP Basic and Digest authentication and
+you only wish to deal with supplying the user credentials for authenticating
+the user.</p>
+
+<p>If using at least Apache 2.2, other Apache modules implementing custom
+authentication mechanisms can also make use of the authentication provider
+if they are using the corresponding Apache C API for accessing them.</p>
+
+<p>More detailed information on using the WSGIAuthUserScript directive can be
+found in Access Control Mechanisms.</p>
+
+<p>The options which can be supplied to the WSGIAuthUserScript directive are:</p>
+
+<p><strong>application-group=name</strong></p>
+
+<blockquote>
+  <p>Specifies the name of the application group within the specified
+  process for which the script file will be loaded.</p>
+  
+  <p>If the 'application-group' option is not supplied, the special value
+  '%{GLOBAL}' which denotes that the script file be loaded within the
+  context of the first interpreter created by Python when it is
+  initialised will be used. Otherwise, will be loaded into the
+  interpreter for the specified application group.</p>
+</blockquote>
+
+<p>Note that the script always runs in processes associated with embedded
+mode. It is not possible to delegate the script such that it is run within
+context of a daemon process.</p>
+
+<h2>WSGIAuthGroupScript</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Specify script implementing group authorisation. |
+|:-----------------------------------------------------------------------------------------|:-------------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGIAuthGroupScript</code> <em><code>path</code></em> <code>[</code> <em><code>options</code></em> <code>]</code> |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong> 2.0+    | directory, .htaccess                             |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Override">Override:</a></strong>       | AuthConfig                                       |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                      |</p>
+
+<p>The WSGIAuthGroupScript directive provides a mechanism for implementing
+group authorisation using the Apache 'Require' directive.</p>
+
+<p>More detailed information on using the WSGIAuthGroupScript directive can be
+found in Access Control Mechanisms.</p>
+
+<p>The options which can be supplied to the WSGIAuthGroupScript directive are:</p>
+
+<p><strong>application-group=name</strong></p>
+
+<blockquote>
+  <p>Specifies the name of the application group within the specified
+  process for which the script file will be loaded.</p>
+  
+  <p>If the 'application-group' option is not supplied, the special value
+  '%{GLOBAL}' which denotes that the script file be loaded within the
+  context of the first interpreter created by Python when it is
+  initialised will be used. Otherwise, will be loaded into the
+  interpreter for the specified application group.</p>
+</blockquote>
+
+<p>Note that the script always runs in processes associated with embedded
+mode. It is not possible to delegate the script such that it is run within
+context of a daemon process.</p>
+
+<h2>WSGIAccessScript</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Specify script implementing host access controls. |
+|:-----------------------------------------------------------------------------------------|:--------------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGIAccessScript</code> <em><code>path</code></em> <code>[</code> <em><code>options</code></em> <code>]</code>   |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong> 2.0+    | directory, .htaccess                              |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Override">Override:</a></strong>       | AuthConfig                                        |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                       |</p>
+
+<p>The WSGIAccessScript directive provides a mechanism for implementing host
+access controls.</p>
+
+<p>More detailed information on using the WSGIAccessScript directive can be
+found in Access Control Mechanisms.</p>
+
+<p>The options which can be supplied to the WSGIAccessScript directive are:</p>
+
+<p><strong>application-group=name</strong></p>
+
+<blockquote>
+  <p>Specifies the name of the application group within the specified
+  process for which the script file will be loaded.</p>
+  
+  <p>If the 'application-group' option is not supplied, the special value
+  '%{GLOBAL}' which denotes that the script file be loaded within the
+  context of the first interpreter created by Python when it is
+  initialised will be used. Otherwise, will be loaded into the
+  interpreter for the specified application group.</p>
+</blockquote>
+
+<p>Note that the script always runs in processes associated with embedded
+mode. It is not possible to delegate the script such that it is run within
+context of a daemon process.</p>
+
+<h2>WSGIScriptReloading</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Enable/Disable detection of WSGI script file changes. |
+|:-----------------------------------------------------------------------------------------|:------------------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGIScriptReloading On|Off</code>                          |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Default">Default:</a></strong>         | <code>WSGIScriptReloading On</code>                              |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config, virtual host, directory, .htaccess     |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Override">Override:</a></strong>       | FileInfo                                              |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                           |</p>
+
+<p>The WSGIScriptReloading directive can be used to control whether changes to
+WSGI script files trigger the reloading mechanism. By default script
+reloading is enabled and a change to the WSGI script file will trigger
+whichever reloading mechanism is specified by the WSGIReloadMechanism
+directive.</p>
+
+<h2>WSGIReloadMechanism</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Reload mechanism used when script changes. |
+|:-----------------------------------------------------------------------------------------|:-------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong> (1.X)     | <code>WSGIReloadMechanism Module|Interpreter</code>   |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong> (2.0)     | <code>WSGIReloadMechanism Module|Process</code>       |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Default">Default:</a></strong> 1.X, 2.0 (embedded) | <code>WSGIReloadMechanism Module</code>               |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Default">Default:</a></strong> 2.0 (daemon) | <code>WSGIReloadMechanism Process</code>              |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config, virtual host, directory, .htaccess |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Override">Override:</a></strong>       | FileInfo                                   |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                |</p>
+
+<p><strong>Note: The 'Interpreter' option described here was removed in mod_wsgi
+version 2.0. The 'Process' option was only added in in mod_wsgi
+version 2.0. The complete WSGIReloadMechanism directive was thence
+removed in mod_wsgi 3.0 with the 'Process' option effectively being the
+default and only choice for dameon mode.</strong></p>
+
+<p>The WSGIReloadMechanism directive can be used to control which type of
+reload mechanism is used when detection of changes to a WSGI script file
+are enabled.</p>
+
+<p>The default reload mechanism depends on the version of mod_wsgi being used
+and whether or not the WSGI application is running in embedded mode or
+daemon mode. If using mod_wsgi version 1.X, the default reload mechanism
+is 'Module'. If using mod_wsgi version 2.0+ (actually 2.0c5+) and the WSGI
+application is running in embedded mode, the default reload mechanism is
+'Module'. If however using mod_wsgi version 2.0+ (actually 2.0c5+) and the
+WSGI application is running in daemon mode, the default reload mechanism
+is 'Process'.</p>
+
+<p>When the 'Module' reload mechanism is used, the Python module which the
+WSGI script file was loaded into will be destroyed when a change in the
+script file is detected. The WSGI script file will then be reloaded into a
+fresh Python module within the existing sub interpreter instance prior to
+the application entry point it contains being executed.</p>
+
+<p>An alternative to the 'Module' reload mechanism in mod_wsgi version 1.X is
+the 'Interpreter' reload mechanism. When this is used, the complete sub
+interpreter associated with the application group the WSGI script is a part
+of will be destroyed. A fresh sub interpreter instance will then be created
+and the WSGI script file reloaded into a fresh Python module within the new
+sub interpreter instance prior to the application entry point it contains
+being executed.</p>
+
+<p>An alternative to the 'Module' reload mechanism in mod_wsgi version 2.0 and
+later is the 'Process' reload mechanism. Because this involves restarting
+of the whole process the WSGI application is running in, it is only
+available for WSGI applications delegated to a mod_wsgi daemon process
+using the WSGIDaemonProcess and WSGIProcessGroup directives. When a change
+to the WSGI script file has been detected, the daemon process in which the
+application runs will be shutdown and restarted before the request is
+passed to the application for processing.</p>
+
+<p>Note that the 'Interpreter' option for the reload mechanism has no effect
+on the first interpreter instance created by Python and indentified by
+using the value '%{GLOBAL}' with the WSGIApplicationGroup directive. For
+this interpreter the behaviour as defined for the 'Module' option always
+applies. This is because this interpreter instance cannot be destroyed and
+must be kept as is for the life of the process.</p>
+
+<p>Similarly, if the 'Process' option is specified for a WSGI application
+running in embedded mode, that is where WSGIProcessGroup is '%{GLOBAL}'
+or not defined in that context, the 'Module' option always applies.</p>
+
+<p>Also note that the 'Module' reload mechanism only applies to the Python
+module the WSGI script file was loaded into, it does not apply to standard
+Python modules. If you make changes to normal Python modules that have
+already been loaded by an application, you will either need to use the
+'Interpreter' option for WSGIReloadMechanism, or restart Apache in order to
+see the changes.</p>
+
+<p>When the 'Module' reload mechanism is being used, if a WSGI script file
+makes modifications to <code>sys.path</code> or other global data structures and
+the changes are additive, checks should first be made to ensure that the
+data does not already exist, else duplicate data will be added every time
+the WSGI script file is reloaded.</p>
+
+<p>This means that when updating <code>sys.path</code>, instead of using:</p>
+
+<p><code>
+import sys
+sys.path.append('/usr/local/wsgi/modules')
+</code></p>
+
+<p>you should use:</p>
+
+<p><code>
+import sys
+path = '/usr/local/wsgi/modules'
+if path not in sys.path:
+    sys.path.append(path)
+</code></p>
+
+<h2>WSGICaseSensitivity</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Define whether file system is case sensitive. |
+|:-----------------------------------------------------------------------------------------|:----------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGICaseSensitivity On|Off</code>                  |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong> 1.X     | server config, virtual host, directory, .htaccess |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong> 2.0+    | server config                                 |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Override">Override:</a></strong>       | FileInfo                                      |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                   |</p>
+
+<p><strong>Note: From mod_wsgi version 2.0 onwards this option will only be able to
+be set in the main server config and will apply to the whole site. All
+paths therefore would need to be located in a filesystem with the same case
+convention.</strong></p>
+
+<p>When mod_wsgi is used on the Windows and MacOS X platforms, it will assume
+that the filesystem in use is case insensitive. This is necessary to ensure
+that the module caching system works correctly and only one module is
+retained in memory where paths with different case are used to identify the
+same script file. On other platforms it will always be assumed that a case
+sensitive file system is used.</p>
+
+<p>The WSGICaseSensitivity directive can be used explicitly to specify for a
+particular WSGI application whether the file system the script file is
+stored in is case sensitive or not, thus overriding the default for any
+platform. A value of On indicates that the filesystem is case sensitive.</p>
+
+<h2>WSGIPythonOptimize</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Enables basic Python optimisation features. |
+|:-----------------------------------------------------------------------------------------|:--------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGIPythonOptimize [0|1|2]</code>                |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Default">Default:</a></strong>         | <code>WSGIPythonOptimize 0</code>                      |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config                               |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                 |</p>
+
+<p>Sets the level of Python compiler optimisations. The default is '0' which
+means no optimisations are applied.</p>
+
+<p>Setting the optimisation level to '1' or above will have the effect of
+enabling basic Python optimisations and changes the filename extension for
+compiled (bytecode) files from <code>.pyc</code> to <code>.pyo</code>.</p>
+
+<p>On the Windows platform, optimisation level of '0' apparently results in
+the same outcome as if the optimisation level had been set to '1'.</p>
+
+<p>When the optimisation level is set to '2', doc strings will not be
+generated and thus not retained. This may techically result in a smaller
+memory footprint if all <code>.pyo</code> files were compiled at this optimisation
+level, but may cause some Python packages which interrogate doc strings in
+some way to fail.</p>
+
+<p>Since all the installed <code>.pyo</code> files in your Python installation are
+not likely to be installed with level '2' optimisation, the gain from using
+this level of optimisation will probably be negligible if any. This is
+because potentially only the Python code for your own application code will
+be compiled with this level of optimisation. This will be the case as the
+<code>.pyo</code> files will aready exist for modules in the standard Python
+library and they will be used as is, rather than them being regenerated
+with a higher level of optimisation than they might be. Use of level '2'
+optimisation is therefore discouraged.</p>
+
+<p>This directive will have no affect if mod_python is being loaded into Apache
+at the same time as mod_wsgi as mod_python will in that case be responsible
+for initialising Python.</p>
+
+<p>Overall, if you do not understand what the normal 'python' executable '-O'
+option does, how the Python runtime changes it behaviour as a result, and
+you don't know exactly how your application would be affected by enabling
+this option, then do not use this option. In other words, stop trying to
+prematurely optimise the performance of your application through shortcuts.
+You will get much better performance gains by looking at the design of your
+application and eliminating bottlenecks within it and how it uses any
+database. So, put the gun down and back away, it will be better for all
+concerned.</p>
+
+<h2>WSGIPythonExecutable</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Absolute path to Python executable. |
+|:-----------------------------------------------------------------------------------------|:------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong> 1.X       | <code>WSGIPythonExecutable</code> <em><code>file-path</code></em> |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config                       |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                         |</p>
+
+<p><strong>Note: The WSGIPythonExecutable directive described here has been removed
+in mod_wsgi version 2.0. The WSGIPythonHome directive should be used
+instead.</strong></p>
+
+<p>Can be used to define the location of the Python executable. This should
+only need to be defined where the Python executable is not in the
+<code>PATH</code> of the user that Apache runs as, or where a system has multiple
+versions of Python installed in different locations in the file system,
+especially different installations of the same major/minor version, and the
+installation that Apache finds in its <code>PATH</code> is not the desired one.</p>
+
+<p>When this directive is used to define the location of the Python executable,
+the Python executable is not actually executed. Instead, Python when
+initialised uses this location as a starting point to try and determine
+where its library files are installed.</p>
+
+<p>For some platforms, this directive is the same as having set the
+environment variable <code>PYTHONEXECUTABLE</code> in the environment of the user
+that Apache executes as. If this directive is used it will override any
+setting of <code>PYTHONEXECUTABLE</code> in the environment of the user that
+Apache executes as.</p>
+
+<p>This directive is not available on the Windows platform. Any problems on
+the Windows platform should be resolved by appropriate changes to the
+Windows registry.</p>
+
+<p>This directive will have no affect if mod_python is being loaded into Apache
+at the same time as mod_wsgi as mod_python will in that case be responsible
+for initialising Python.</p>
+
+<h2>WSGIPythonHome</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Absolute path to Python prefix/exec_prefix directories. |
+|:-----------------------------------------------------------------------------------------|:---------------------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGIPythonHome</code> <em><code>prefix|prefix:exec_prefix</code></em>           |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config                                            |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                              |</p>
+
+<p>Used to indicate to Python when it is initialised where its library files
+are installed. This should be defined where the Python executable is not in
+the <code>PATH</code> of the user that Apache runs as, or where a system has
+multiple versions of Python installed in different locations in the file
+system, especially different installations of the same major/minor version,
+and the installation that Apache finds in its <code>PATH</code> is not the desired
+one.</p>
+
+<p>This directive can also be used to indicate a Python virtual environment
+created using a tool such as <code>virtualenv</code>, to be used for the whole of
+mod_wsgi.</p>
+
+<p>When this directive is used it should be supplied the prefix for the
+directories containing the platform independent and system dependent Python
+library files. The directories should be separated by a ':'. If the same
+directory is used for both, then only the one directory path needs to be
+supplied. Where the directories are the same, this can usually be
+determined by looking at the value of the <code>sys.prefix</code> variable for the
+version of Python being used.</p>
+
+<p>Note that the Python installation being referred to using this directive
+must be the same major/minor version of Python that mod_wsgi was compiled
+for. If you want to use a different version of major/minor version of
+Python than currently used, you must recompile mod_wsgi against the alternate
+version of Python.</p>
+
+<p>This directive is the same as having set the environment variable
+<code>PYTHONHOME</code> in the environment of the user that Apache executes as. If
+this directive is used it will override any setting of <code>PYTHONHOME</code> in
+the environment of the user that Apache executes as.</p>
+
+<p>This directive will have no affect if mod_python is being loaded into Apache
+at the same time as mod_wsgi as mod_python will in that case be responsible
+for initialising Python.</p>
+
+<p>This directive is not available on Windows systems. Note that mod_wsgi 1.X
+will not actually reject this directive if listed in the configuration,
+however, it also will not do anything either. This is because on Windows
+systems Python ignores the <code>PYTHONHOME</code> environment variable and always
+seems to use the location of the Python DLL for determining where the
+library files are located.</p>
+
+<h2>WSGIPythonPath</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Additional directories to search for Python modules. |
+|:-----------------------------------------------------------------------------------------|:-----------------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGIPythonPath</code> <em><code>directory|directory-1:directory-2:...</code></em> |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config                                        |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                          |</p>
+
+<p><strong>Note: The directive behaves differently between mod_wsgi version 1.X and
+version 2.0.</strong></p>
+
+<p>Used to specify additional directories to search for Python modules. If
+multiple directories are specified they should be separated by a ':' if
+using a UNIX like system, or ';' if using Windows. If any part of a
+directory path contains a space character, the complete argument string to
+WSGIPythonPath must be quoted.</p>
+
+<p>When using mod_wsgi version 1.X, this directive is the same as having set
+the environment variable <code>PYTHONPATH</code> in the environment of the user
+that Apache executes as. If this directive is used it will override any
+setting of <code>PYTHONPATH</code> in the environment of the user that Apache
+executes as. The end result is that the listed directories will be added
+to <code>sys.path</code>.</p>
+
+<p>Note that in mod_wsgi version 1.X this applies to all Python sub
+interpreters created, be they in the Apache child processes when embedded
+mode is used, or in distinct daemon processes when daemon mode is used. It
+is not possible to define this differently for mod_wsgi daemon processes.
+If additional directories need to be added to the module search path for a
+specific WSGI application it should be done within the WSGI application
+script itself.</p>
+
+<p>When using mod_wsgi version 2.0, this directive does not have the same
+affect as having set the environment variable <code>PYTHONPATH</code>. In fact, if
+<code>PYTHONPATH</code> is set in the environment of the user that Apache is
+started as, any directories so defined will still be added to
+<code>sys.path</code> and they will not be overridden.</p>
+
+<p>The difference with this directive when using mod_wsgi 2.0 is that each
+directory listed will be added to the end of <code>sys.path</code> by calling
+<code>site.addsitedir()</code>. By using this function, as well as the directory
+being added to <code>sys.path</code>, any '.pth' files located in the directories
+will be opened and processed. Thus, if the directories contain Python eggs,
+any associated directories corresponding to those Python eggs will in turn
+also be added automatically to <code>sys.path</code>.</p>
+
+<p>Note however that when using mod_wsgi 2.0, this directive only sets up the
+additional Python module search directories for interpreters created in the
+Apache child processes where embedded mode is used. If directories need to
+be specified for interpreters running in daemon processes, the
+'python-path' option to the WSGIDaemonProcess directive corresponding to
+that daemon process should instead be used.</p>
+
+<p>In mod_wsgi version 2.0, because directories corresponding to Python eggs
+are automatically added to <code>sys.path</code>, the directive can be used to
+point at the <code>site-packages</code> directory corresponding to a Python
+virtual environment created by a tool such as <code>virtualenv</code>.</p>
+
+<p>For mod_wsgi 1.X, this directive will have no affect if mod_python is being
+loaded into Apache at the same time as mod_wsgi as mod_python will in that
+case be responsible for initialising Python.</p>
+
+<h2>WSGIPythonEggs</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Directory to use for Python eggs cache. |
+|:-----------------------------------------------------------------------------------------|:----------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong> 2.0+      | <code>WSGIPythonEggs</code> <em><code>directory</code></em>          |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config                           |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                             |</p>
+
+<p><strong>Note: This directive was only added in mod_wsgi version 2.0.</strong></p>
+
+<p>Used to specify the directory to be used as the Python eggs cache directory
+for all sub interpreters created within embedded mode. This directive
+achieves the same affect as having set the <code>PYTHON_EGG_CACHE</code>
+environment variable.</p>
+
+<p>Note that the directory specified must exist and be writable by the user
+that the Apache child processes run as. The directive only applies to
+mod_wsgi embedded mode. To set the Python eggs cache directory for mod_wsgi
+daemon processes, use the 'python-eggs' option to the WSGIDaemonProcess
+directive instead.</p>
+
+<h2>WSGIRestrictEmbedded</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Enable restrictions on use of embedded mode. |
+|:-----------------------------------------------------------------------------------------|:---------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGIRestrictEmbedded On|Off</code>                |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Default">Default:</a></strong> 2.0+    | <code>WSGIRestrictEmbedded Off</code>                   |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config                                |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                  |</p>
+
+<p>The WSGIRestrictEmbedded directive determines whether mod_wsgi embedded
+mode is enabled or not. If set to 'On' and the restriction on embedded mode
+is therefore enabled, any attempt to make a request against a WSGI
+application which hasn't been properly configured so as to be delegated to
+a daemon mode process will fail with a HTTP internal server error response.</p>
+
+<p>This option does not exist on Windows, or Apache 1.3 or any other
+configuration where daemon mode is not available.</p>
+
+<h2>WSGIRestrictStdin</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Enable restrictions on use of STDIN. |
+|:-----------------------------------------------------------------------------------------|:-------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGIRestrictStdin On|Off</code>           |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Default">Default:</a></strong>         | <code>WSGIRestrictStdin On</code>               |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config                        |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                          |</p>
+
+<p>A well behaved Python WSGI application should never attempt to read any
+input directly from <code>sys.stdin</code>. This is because ways of hosting WSGI
+applications such as CGI use standard input as the mechanism for receiving
+the content of a request from the web server. If a WSGI application were to
+directly read from <code>sys.stdin</code> it could interfere with the operation of
+the WSGI adapter and result in corruption of the input stream.</p>
+
+<p>In the interests of promoting portability of WSGI applications, mod_wsgi
+restricts access to <code>sys.stdin</code> and will raise an exception if an
+attempt is made to use <code>sys.stdin</code> explicitly.</p>
+
+<p>The only time that one might want to remove this restriction is if the Apache
+web server is being run in debug or single process mode for the purposes of
+being able to run an interactive Python debugger such as <code>pdb</code>.</p>
+
+<h2>WSGIRestrictStdout</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Enable restrictions on use of STDOUT. |
+|:-----------------------------------------------------------------------------------------|:--------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGIRestrictStdout On|Off</code>           |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Default">Default:</a></strong>         | <code>WSGIRestrictStdout On</code>               |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config                         |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                           |</p>
+
+<p>A well behaved Python WSGI application should never attempt to write any
+data directly to <code>sys.stdout</code> or use the <code>print</code> statement without
+directing it to an alternate file object. This is because ways of hosting
+WSGI applications such as CGI use standard output as the mechanism for
+sending the content of a response back to the web server. If a WSGI
+application were to directly write to <code>sys.stdout</code> it could interfere
+with the operation of the WSGI adapter and result in corruption of the
+output stream.</p>
+
+<p>In the interests of promoting portability of WSGI applications, mod_wsgi
+restricts access to <code>sys.stdout</code> and will raise an exception if an
+attempt is made to use <code>sys.stdout</code> explicitly.</p>
+
+<p>The only time that one might want to remove this restriction is purely out
+of convencience of being able to use the <code>print</code> statement during
+debugging of an application, or if some third party module or WSGI
+application was errornously using <code>print</code> when it shouldn't. If
+restrictions on using <code>sys.stdout</code> are removed, any data written to
+it will instead be sent through to <code>sys.stderr</code> and will appear in
+the Apache error log file.</p>
+
+<h2>WSGIRestrictSignal</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Enable restrictions on use of signal(). |
+|:-----------------------------------------------------------------------------------------|:----------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGIRestrictSignal On|Off</code>             |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Default">Default:</a></strong>         | <code>WSGIRestrictSignal On</code>                 |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config                           |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                             |</p>
+
+<p>A well behaved Python WSGI application should not in general register any
+signal handlers of its own using <code>signal.signal()</code>. The reason for this
+is that the web server which is hosting a WSGI application will more than
+likely register signal handlers of its own. If a WSGI application were to
+override such signal handlers it could interfere with the operation of the
+web server, preventing actions such as server shutdown and restart.</p>
+
+<p>In the interests of promoting portability of WSGI applications, mod_wsgi
+restricts use of <code>signal.signal()</code> and will ensure that any attempts
+to register signal handlers are ignored. A warning notice will be output
+to the Apache error log indicating that this action has been taken.</p>
+
+<p>If for some reason there is a need for a WSGI application to register some
+special signal handler this behaviour can be turned off, however an
+application should avoid the signals <code>SIGTERM</code>, <code>SIGINT</code>,
+<code>SIGHUP</code>, <code>SIGWINCH</code> and <code>SIGUSR1</code> as these are all used by
+Apache.</p>
+
+<p>Apache will ensure that the signal <code>SIGPIPE</code> is set to <code>SIG_IGN</code>.
+If a WSGI application needs to override this, it must ensure that it is
+reset to <code>SIG_IGN</code> before any Apache code is run. In a multi threaded
+MPM this would be practically impossible to ensure so it is preferable that
+the handler for <code>SIG_PIPE</code> also not be changed.</p>
+
+<p>Apache does not use <code>SIGALRM</code>, but it is generally preferable that
+other techniques be used to achieve the same affect.</p>
+
+<p>Do note that if enabling the ability to register signal handlers, such a
+registration can only reliably be done from within code which is
+implemented as a side effect of importing a script file identified by the
+WSGIImportScript directive. This is because signal handlers can only be
+registered from the main Python interpreter thread, and request handlers
+when using embedded mode and a multithreaded Apache MPM would generally
+execute from secondary threads. Similarly, when using daemon mode, request
+handlers would executed from secondary threads. Only code run as a side
+effect of WSGIImportScript is guaranteed to be executed in main Python
+interpreter thread.</p>
+
+<h2>WSGIAcceptMutex</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Specify type of accept mutex used by daemon processes. |
+|:-----------------------------------------------------------------------------------------|:-------------------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong>           | <code>WSGIAcceptMutex Default|method</code>                       |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Default">Default:</a></strong>         | <code>WSGIAcceptMutex Default</code>                              |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config                                          |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                            |</p>
+
+<p>The WSGIAcceptMutex directive sets the method that mod_wsgi will use to
+serialize multiple daemon processes in a process group accepting requests
+on a socket connection from the Apache child processes. If this directive
+is not defined then the same type of mutex mechanism as used by Apache for
+the main Apache child processes when accepting connections from a client
+will be used. If set the method types are the same as for the Apache
+<a href="http://httpd.apache.org/docs/2.2/mod/mpm_common.html#acceptmutex">AcceptMutex</a>
+directive.</p>
+
+<p>Note that the WSGIAcceptMutex directive and corresponding features are
+not available on Windows or when running Apache 1.3.</p>
+
+<h2>WSGILazyInitialization</h2>
+
+<p>| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Description">Description:</a></strong> | Enable/disable lazy initialisation of Python. |
+|:-----------------------------------------------------------------------------------------|:----------------------------------------------|
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Syntax">Syntax:</a></strong> 3.0+      | <code>WSGILazyInitialization On|Off</code>               |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Default">Default:</a></strong> 3.0+    | <code>WSGILazyInitialization On</code>                   |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Context">Context:</a></strong>         | server config                                 |
+| <strong><a href="http://httpd.apache.org/docs/2.2/mod/directive-dict.html#Module">Module:</a></strong>           | mod_wsgi.c                                   |</p>
+
+<p><strong>Note: This directive was only added in mod_wsgi version 3.0.</strong></p>
+
+<p>The WSGILazyInitialization directives sets whether or not the Python
+interpreter is preinitialised within the Apache parent process or whether
+lazy initialisation is performed, and the Python interpreter only
+initialised in the Apache server processes or mod_wsgi daemon processes
+after they have forked from the Apache parent process.</p>
+
+<p>In versions of mod_wsgi prior to version 3.0 the Python interpreter was
+always preinitialised in the Apache parent process. This did mean that
+theoretically some benefit in memory usage could be derived from delayed
+copy on write semantics of memory inherited by child processes that was
+initialised in the parent. This memory wasn't significant however and was
+tempered by the fact that the Python interpreter when destroyed and then
+reinitialised in the Apache parent process on an Apache restart, would with
+some Python versions leak memory. This meant that if a server had many
+restarts performed, the Apache parent process and thus all forked child
+processes could grow in memory usage over time, eventually necessitating
+Apache be completely stopped and then restarted.</p>
+
+<p>This issue of memory leaks with the Python interpreter reached an extreme
+with Python 3.0, where by design, various data structures would not be
+destroyed on the basis that it would be reused when Python interpreter was
+reinitialised within the same process. The problem is that when an Apache
+restart is performed, mod_wsgi and the Python library are unloaded from
+memory, with the result that the references to that memory would be lost
+and so a real memory leak, of significant size and much worse that older
+versions of Python, would result.</p>
+
+<p>As a consequence, with mod_wsgi 3.0 and onwards, the Python interpreter is
+not initialised by default in the Apache parent process for any version of
+Python. This avoids completely the risk of cummulative memory leaks by the
+Python interpreter on a restart into the Apache parent process, albeit with
+potential for a slight increase in child process memory sizes. If need be,
+the existing behaviour can be restored by setting the directive with the
+value 'Off'.</p>
+
+<p>A further upside of using lazy initialisation is that if you are using
+daemon mode only, ie., not using embedded mode, you can completely turn off
+initialisation of the Python interpreter within the main Apache server
+child process. Unfortunately, because it isn't possible in the general case
+to know whether embedded mode will be needed or not, you will need to
+manually set the configuration to do this. This can be done by setting:</p>
+
+<p><code>
+WSGIRestrictEmbedded On
+</code></p>
+
+<p>With restrictions on embedded mode enabled, any attempt to run a WSGI
+application in embedded mode will fail, so it will be necessary to ensure
+all WSGI applications are delegated to run in daemon mode. Although WSGI
+applications will be restricted from being run in embedded mode and the
+Python interpreter therefore not initialised, it will fallback to being
+initialised if you use any of the Python hooks for access control,
+authentication or authorisation providers, or WSGI application dispatch
+overrides.</p>
+
+<p>Note that if mod_python is being used in the same Apache installation,
+because mod_python takes precedence over mod_wsgi in initialising the
+Python interpreter, lazy initialisation cannot be done and so Python
+interpreter will continue to be preinitialised in the Apache parent process
+regardless of the setting of WSGILazyInitialization. Use of mod_python will
+thus perpetuate the risk of memory leaks and growing memory use of Apache
+process. This is especially the case since mod_python doesn't even properly
+destroy the Python interpreter in the Apache parent process on a restart
+and so all memory associated with the Python interpreter is leaked and not
+just that caused by the Python interpreter when it is destroyed and doesn't
+clean up after itself.</p></markdown-widget>
+        </div><!-- end ngIf: !wikiCtrl.error -->
+      </div>
+    </div>
+  </div>
+</div>
+</div></div>
+    <noscript>
+      <p>The Google Code Archive requires JavaScript to be enabled in your browser.</p>
+    </noscript>
+
+    <div id="maia-signature"></div>
+    <div class="maia-footer" id="maia-footer">
+      <div id="maia-footer-local">
+      </div>
+      <div id="maia-footer-global">
+        <div class="maia-aux">
+          <ul>
+            <li>
+              <a href="https://www.google.com/">Google</a>
+            </li>
+            <li>
+              <a href="https://www.google.com/intl/en/about/">About Google</a>
+            </li>
+            <li>
+              <a href="https://www.google.com/intl/en/policies/privacy/">Privacy</a>
+            </li>
+            <li>
+              <a href="https://www.google.com/intl/en/policies/terms/">Terms</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script src="./modwsgi_files/maia.js"></script>
+  
+
+
+<iframe frameborder="0" scrolling="no" style="background-color: transparent; border: 0px; display: none;" src="./modwsgi_files/saved_resource.html"></iframe><div id="GOOGLE_INPUT_CHEXT_FLAG" style="display: none;" input="" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:true,&quot;ss&quot;:true}"></div></body></html>
