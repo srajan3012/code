@@ -1,16 +1,18 @@
+## To Fix these issues:
+### client_loop: send disconnect: Broken pipe
+### Connection reset by \<IP\> port 22
 
-## client_loop: send disconnect: Broken pipe
-## Connection reset by <IP> port 22”
+Add this to `~/.ssh/config`
 
 ```
 Host *
     ServerAliveInterval 20
     TCPKeepAlive no
-Motivation:
 ```
 
-TCPKeepAlive no means "do not send keepalive messages to the server". 
-When the opposite, TCPKeepAlive yes, is set, then the client sends keepalive messages to the server and requires a response in order to maintain its end of the connection. This will detect if the server goes down, reboots, etc. 
+**TCPKeepAlive no** - *do not send keepalive messages to the server*
+
+**TCPKeepAlive yes** - *client sends keepalive messages to the server and requires a response in order to maintain its end of the connection*. This will detect if the server goes down, reboots, etc. 
 
 The trouble with this is that if the connection between the client and server is broken for a brief period of time (due to flaky a network connection), this will cause the keepalive messages to fail, and the client will end the connection with "broken pipe".
 
