@@ -5,11 +5,15 @@
 
 # list out screens
 	> screen -ls 
+	
+# Attached means someone logged into the screen. To connect to an already attached session:
+	> screen -rx <session name>
+	
 # Detached means screen is active but no one is logged in to it. To connect to a detached session:
 	> screen -r <session name>
 
-# Attached means someone logged into the screen. To connect to an already attached session:
-	> screen -rx <session name>
+# Detach from a screen
+	> ctrl+a, d
 
 
 # sending commnad to screen session without connecting or attaching:
