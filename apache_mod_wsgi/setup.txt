@@ -78,6 +78,27 @@ Following: https://pypi.org/project/mod-wsgi/
 		        #Allow from all
 		    </Directory>
 		</VirtualHost>
+	
+	NOTE: If trying to deploy more than one wsgi app, don't add another VirtualHost. Instead add the WSGI alias in the same VirtualHost.(Ref: https://stackoverflow.com/a/22925866/5353329)
+	e.g.
+	<VirtualHost *>
+		    ServerName slc12cfp.us.oracle.com
+
+		    WSGIDaemonProcess flask_test user=apache group=apache  threads=5
+		    WSGIScriptAlias /raas  /scratch/srgarg/apache/flask_test/flask_test.wsgi application-group=%{GLOBAL}
+		    <Directory /scratch/srgarg/apache/flask_test>
+		        WSGIProcessGroup flask_test
+		        Require all granted
+		    </Directory>
+
+ 		    WSGIDaemonProcess flask_test2 user=apache group=apache  threads=5
+		    WSGIScriptAlias /raas2  /scratch/srgarg/apache/flask_test/flask_test2.wsgi application-group=%{GLOBAL}
+   		    <Directory /scratch/srgarg/apache/flask_test2>
+		        WSGIProcessGroup flask_test2
+		        Require all granted
+		    </Directory>
+		</VirtualHost>
+
 
 	8.3 : WSGIDaemonProcess delegates flask to a daemon process. See point 11
 		: WSGIScriptAlias first argument is url endpoint, second argument is location that is mounted on endpoint
